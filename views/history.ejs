@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Operation History</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet/hist.css" />
+</head>
+<body>
+<div class="operations">
+	<% docs.forEach(function(doc) { %>
+	    <li><%= doc.operation %></li>
+	<% }); %>
+
+	<a href="/"><button>Go Back</button></a>
+</div>
+</body>
+
+</html>
+

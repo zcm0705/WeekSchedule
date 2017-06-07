@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Week Schedule</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet/skeleton.css" />
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+	<div class="timeline">
+		<ul>
+			<li>09:00</li>
+			<li>10:00</li>
+			<li>11:00</li>
+			<li>12:00</li>
+			<li>13:00</li>
+			<li>14:00</li>
+			<li>15:00</li>
+			<li>16:00</li>
+			<li>17:00</li>
+			<li>18:00</li>
+		</ul>
+	</div>
+
+	<div class="schedule">
+		<ul>
+			<li class="one-day">
+				<div class="day-name">Monday</div>
+			</li>
+
+			<li class="one-day">
+				<div class="day-name">Tuesday</div>
+			</li>
+
+			<li class="one-day">
+				<div class="day-name">Wednesday</div>
+
+			</li>
+
+			<li class="one-day">
+				<div class="day-name">Thursday</div>
+			</li>
+
+			<li class="one-day">
+				<div class="day-name">Friday</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="button-group">
+		<a href="/history"><button>Go to history</button></a>
+
+		<form>
+			<input placeholder = "start time" id = "start-time" required /><br/>
+			<input placeholder = "end time" id="end-time" required /><br/>
+			<input placeholder = "name" id="event-name"><br/>
+			<select id="event-day">
+				<option value="1">Monday</option>
+				<option value="2">Tuesday</option>
+				<option value="3">Wednesday</option>
+				<option value="4">Thursday</option>
+				<option value="5">Friday</option>
+			</select>
+			<textarea placeholder="More detail...(Max 200 Characters)" maxlength="200"></textarea>
+			<button id="add-btn">Add</button>
+		</form>
+	</div>
+	
+</div>
+	<script src="javascript/jquery.js"></script>
+	<script src="javascript/event.js"></script>
+
+</body>
+</html>
