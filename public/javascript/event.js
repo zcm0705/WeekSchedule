@@ -4,8 +4,8 @@
 
 $("#add-btn").on('click', function(ev) {
 	ev.preventDefault();
-	var sTime = $("#start-time").val();
-	var eTime = $("#end-time").val();
+	var start = $("#start-time").val();
+	var end = $("#end-time").val();
 	var eName = $("#event-name").val();
 	var eDay = $("#event-day").val();
 	var eInfo = $("textarea").val();
@@ -16,8 +16,8 @@ $("#add-btn").on('click', function(ev) {
 	
 	//json: store data
 	var event = {
-		startTime: parseInt(sTime),
-		endTime: parseInt(eTime),
+		startTime: start,
+		endTime: end,
 		name: eName,
 		day: parseInt(eDay),
 		info: eInfo
@@ -33,19 +33,23 @@ $("#add-btn").on('click', function(ev) {
 	
 });
 
+function convertTime(time) {
+	var arr = time.toString().split(":");
+	var hr = parseInt(arr[0]);
+	var min = parseInt(arr[1]);
+	return (hr * 60 + min) / 60;
+}
+
 function placeEvent(event) {
-	var top = 61 + 40 * (event.startTime - 9);
-	var height = 40 * (event.endTime - event.startTime);
+	var top = 65 + 40 * (convertTime(event.startTime) - 9);
+	var height = 40 * (convertTime(event.endTime) - convertTime(event.startTime));
 	var left = 140 + (event.day - 1) * 102;
 
 	//create event element
-	var eventDiv = $("<div>");
+	var eventDiv = $("<div>").text(event.name).appendTo($("body"));
+	eventDiv.css({top:top, left: left, height: height});
+	eventDiv.addClass("eventDiv");
 	
-	eventDiv.text(event.name);
-	$("body").append(eventDiv);
-
-	eventDiv.css({top:top, left: left, height: height, position: "absolute", width: 102, backgroundColor: "#0088FF"});
-
 	var open = false;
 	eventDiv.on('click', function(ev) {
 		if (open) {
@@ -58,9 +62,6 @@ function placeEvent(event) {
 	});
 }
 
-
-
-
 function openEvent(ev, event) {
 	var evDiv = $(ev.target);
 	evDiv.css("z-index", 5);
@@ -71,6 +72,13 @@ function openEvent(ev, event) {
 		top: "100px",
 		left: "100px",
 	}, 1000, function() {
+		//show detailed info
+		var info = $("<div class='info'>");
+		var $start = $("<div>").text("start time: " + event.startTime).addClass("display-time").appendTo(info);
+		var $end = $("<div>").text("end time: " + event.endTime).addClass("display-time").appendTo(info);
+		var $desc = $("<div>").text(event.info).addClass("display-info").appendTo(info);
+		evDiv.append(info);
+		
 		//create delete button
 		var del = $("<button class='delBtn'>");
 		del.text("Delete");
@@ -85,25 +93,8 @@ function openEvent(ev, event) {
 			evDiv.remove();
 		});
 
-		// var editBtn = $("<button class='edit-Btn'>");
-		// editBtn.text("Edit");
-		// evDiv.append(editBtn);
-		// editBtn.css({left: "700px", top: "30px", position: "absolute"});
-		// editBtn.on('click', function () {
-		// 	$.ajax({
-		// 		url:"/history",
-		// 		method:"PUT",
-		// 		data:{operation:"edit event"}
-		// 	});
-		// 	//TODO
-		// 	//implement edit function
-		// });
-
-		//show detailed info
-		var info = $("<div class='info'>");
-		info.text(event.startTime + " - " + event.endTime + ": " + event.info);
-		info.addClass("display-info")
-		evDiv.append(info);
+		//edit function
+		
 	});
 }
 
@@ -121,26 +112,37 @@ function closeEvent(ev, top, left, height) {
 		// $(".edit-Btn").remove();
 		$(".delBtn").remove();
 		$(".info").remove();
+		$(".editBtn").remove();
 	});
 }
 
 //set some default events for testing
 var yoga = {
-	startTime: 10,
-	endTime: 11,
+	startTime: "10:00",
+	endTime: "11:00",
 	day: 2,
-	name: "yoga",
+	name: "Yoga",
 	info: "yoga refreshes your brain"
 };
 
 placeEvent(yoga);
 
 var GER20B = {
-	startTime: 9,
-	endTime: 12,
+	startTime: "9:00",
+	endTime: "12:30",
 	day: 3,
 	name: "GER 20B: Continuing German",
 	info: "Provides an overview of the relationship between nature and culture in North America. Covers Native Americans, the European invasion, the development of a market system of resource extraction and etc."
-}
+};
 
 placeEvent(GER20B);
+
+var SOC147A = {
+	startTime: "10:30",
+	endTime: "13:00",
+	day: 1,
+	name: "SOC 147A: Sustainable and Resilient Cities",
+	info: "Studies innovations in the U.S and around the world that enhance urban sustainability"
+};
+
+placeEvent(SOC147A);

@@ -5,23 +5,22 @@ body {
 
 .wrapper {
 	margin: 40px;
-	position: relative;
 	display: inline-flex;
 	width: 900px;
 	height: 100%;
 }
 
-.wrapper .timeline {
+.timeline {
 	height: 100%;
 	width: 100px;
 }
 
-.wrapper .timeline > ul {
+.timeline > ul {
 	list-style-type: none;
 }
 
-.wrapper .timeline li {
-	width: 100px;
+.timeline li {
+	width: 50px;
 	height: 40px;
 }
 
@@ -32,8 +31,8 @@ body {
 	margin: 0;
 }
 
-.wrapper .schedule {
-	width: 750px;
+.schedule {
+	width: 550px;
 }
 
 .wrapper .schedule .one-day {
@@ -65,9 +64,28 @@ button {
 	position: absolute;
 }
 
+.eventDiv {
+	position: absolute;
+	width: 102px;
+	background-color: #0088FF;
+	overflow:hidden;
+    text-align: center;
+	vertical-align: middle;
+}
+
+.eventDiv:hover {
+	background-color: #00bbff;
+}
+
 /*info box when open the event*/
 .display-info {
 	margin: 40px;
 }
 
+.display-time {
+	margin: 10px;
+}
 
+.info {
+	text-align: left;
+}
