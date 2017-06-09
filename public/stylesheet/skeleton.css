@@ -75,6 +75,7 @@ button {
 
 .eventDiv:hover {
 	background-color: #00bbff;
+	cursor: pointer;
 }
 
 /*info box when open the event*/
